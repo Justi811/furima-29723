@@ -25,62 +25,65 @@ Things you may want to cover:
 # テーブル設計
 
 ## users table
-| Column       | Type    | Options     |
-| ------------ | ------- | ----------- |
-| nickname     | strings | null false  |
-| password     | strings | null false  |
-| email        | strings | null false  |
-| name         | strings | null false  |
-| surname      | strings | null false  |
-| kana_name    | strings | null false  |
-| kana_surname | strings | null false  |
-| birthday     | strings | null false  |
+| Column       | Type   | Options     |
+| ------------ | ------ | ----------- |
+| nickname     | string | null false  |
+| password     | string | null false  |
+| email        | string | null false  |
+| name         | string | null false  |
+| surname      | string | null false  |
+| kana_name    | string | null false  |
+| kana_surname | string | null false  |
+| birthday     | date   | null false  |
 
 ### Association
 
 - has many : items
-- has one : credit_card
-- has one : address
+- has many : orders
 
 ## items table
-| Column        | Type    | Options     |
-| ------------- | ------- | ----------- |
-| item_id       | integer | null false  |
-| name          | strings | null false  |
-| description   | strings | null false  |
-| category      | strings | null false  |
-| condition     | strings | null false  |
-| shipping_fee  | strings | null false  |
-| shipping_area | strings | null false  |
-| shipping_date | strings | null false  |
-| price         | strings | null false  |
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ----------------------------- |
+| user_id          | references | null false,foreign_key: true  |
+| name             | string     | null false                    |
+| description      | text       | null false                    |
+| category_id      | integer    | null false                    |
+| condition_id     | integer    | null false                    |
+| shipping_fee_id  | integer    | null false                    |
+| shipping_area_id | integer    | null false                    |
+| shipping_date_id | integer    | null false                    |
+| price            | integer    | null false                    |
 
 ### Association
 
+- has _one :orders
 - belongs_to : users
 
-## credit_card table
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| card_number     | strings | null false  |
-| expiration_date | strings | null false  |
-| security_code   | strings | null false  |
 
-### Association
-
-- belongs_to : user
 
 ## address table
 
 | Column          | Type    | Options     |
 | --------------- | ------- | ----------- |
-| postal_code     | integer | null false  |
-| prefectures     | strings | null false  |
-| city            | strings | null false  |
-| address         | strings | null false  |
-| buildings       | strings | null false  |
-| phone           | integer | null false  |
+| postal_code     | string  | null false  |
+| prefecture_id   | integer | null false  |
+| city            | string  | null false  |
+| address         | string  | null false  |
+| buildings       | string  | null false  |
+| phone           | string  | null false  |
 
 ### Association
 
+- belongs_to : orders
+
+## orders table
+
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| item_id         | references | foreign_key:true  |
+| user_id         | references | foreign_key:true  |
+
+### Association
+- has_one :address
 - belongs_to : users
+- belongs_to : items
