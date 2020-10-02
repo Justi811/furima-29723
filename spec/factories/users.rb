@@ -8,6 +8,6 @@ FactoryBot.define do
     kana_surname         { 'フルマ' }
     password             { 'Test111' }
     password_confirmation { password }
-    birthday {'1989-12-25'}
+    birthday { '1989-12-25'}
   end
 end
