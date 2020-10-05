@@ -1,16 +1,16 @@
 class Item < ApplicationRecord
   has_one :order
   belongs_to :user
-  belongs_to_active_hash :category_id, :condition_id, :shipping_fee_id, :shipping_area_id,:shipping_date_id
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :category, :condition, :shipping_fee, :shipping_area,:shipping_date
+
+ validates :name , :description, presence: true
 
 
-end
+  with_options presence: true, numericality: { other_than:1} do
+    validetes :category_id, :condition_id, :shipping_fee_id, :shipping_area_id, :shipping_date_id
+  end
 
-with_options presence:true do
-  validates :name , :description
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999}
 
-  validetes :category_id, :condition_id, :shipping_fee_id, :shipping_area_id,
-            :shipping_date_id, format {with: greater_than_or_equal_to:1}
-  
-  validetes :price, format{with: greater_than: 300, less_than: 9999999}, numericality: {only_integer: true }
 end

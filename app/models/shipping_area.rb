@@ -1,15 +1,15 @@
-class ShippingAreaId < ActiveHash::Base
+class ShippingArea < ActiveHash::Base
   self.data = [
-  { id: 1,  name: '---' },
-  { id: 2,  name: '北海道' },
-  { id: 3,  name: '青森県' },
-  { id: 4,  name: '岩手県' },
-  { id: 5,  name: '宮城県' },
-  { id: 6,  name: '秋田県' },
-  { id: 7,  name: '山形県' },
-  { id: 8,  name: '福島県' },
-  { id: 9,  name: '茨城県' },
-  { id: 10, name: '栃木県' }
+  { id: 1, name: '---' },
+  { id: 2, name: '北海道' },
+  { id: 3, name: '青森県' },
+  { id: 4, name: '岩手県' },
+  { id: 5, name: '宮城県' },
+  { id: 6, name: '秋田県' },
+  { id: 7, name: '山形県' },
+  { id: 8, name: '福島県' },
+  { id: 9, name: '茨城県' },
+  { id: 10, name: '栃木県' },
   { id: 11, name: '群馬県' },
   { id: 12, name: '埼玉県' },
   { id: 13, name: '千葉県' },
@@ -19,7 +19,7 @@ class ShippingAreaId < ActiveHash::Base
   { id: 17, name: '石川県' },
   { id: 18, name: '富山県' },
   { id: 19, name: '福井県' },
-  { id: 20, name: '山梨県' }
+  { id: 20, name: '山梨県' },
   { id: 21, name: '長野県' },
   { id: 22, name: '岐阜県' },
   { id: 23, name: '静岡県' },
@@ -29,7 +29,7 @@ class ShippingAreaId < ActiveHash::Base
   { id: 27, name: '京都府' },
   { id: 28, name: '大阪府' },
   { id: 29, name: '兵庫県' },
-  { id: 30, name: '奈良県' }
+  { id: 30, name: '奈良県' },
   { id: 41, name: '和歌山県' },
   { id: 42, name: '鳥取県' },
   { id: 43, name: '島根県' },
@@ -39,7 +39,7 @@ class ShippingAreaId < ActiveHash::Base
   { id: 47, name: '徳島県' },
   { id: 48, name: '香川県' },
   { id: 49, name: '愛媛県' },
-  { id: 50, name: '高知県' }
+  { id: 50, name: '高知県' },
   { id: 51, name: '福岡県' },
   { id: 52, name: '佐賀県' },
   { id: 53, name: '長崎県' },
