@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
-    id               {1}
-    user_id          {1}
+    id               { 1 }
+    user_id          { 1 }
     name             { Faker::Coffee.blend_name }
     description      { Faker::Coffee.notes }
     category_id      {2}

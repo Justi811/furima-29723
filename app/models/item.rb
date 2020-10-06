@@ -9,12 +9,13 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_area
   belongs_to_active_hash :shipping_date
 
-    validates :name, presence: true
-    validates :description, presence: true
-    validates :image, presence: true
+  with_options presence: true do
+    validates :name
+    validates :description
+    validates :image
+  end
 
-
-  with_options presence: true, numericality: { greater_than:1} do
+  with_options presence: true, numericality: { greater_than: 1 } do
     validates :category_id
     validates :condition_id
     validates :shipping_fee_id
@@ -22,6 +23,5 @@ class Item < ApplicationRecord
     validates :shipping_date_id
   end
 
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999}
-
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end
