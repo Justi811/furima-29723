@@ -1,10 +1,11 @@
 class Item < ApplicationRecord
   has_one :order
+  has_one_attached :image
   belongs_to :user
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category, :condition, :shipping_fee, :shipping_area,:shipping_date
 
- validates :name , :description, presence: true
+ validates :name , :description, :image, presence: true
 
 
   with_options presence: true, numericality: { other_than:1} do
