@@ -1,16 +1,20 @@
 class ItemsController < ApplicationController
-  before_action :redirect_to_index, except: [:index, :show]
+  before_action :redirect_to_index, except: [:index, :show,:edit]
   before_action :set_item, only: [:edit, :update, :show]
-
+  before_action :editorial_authority,only: [:edit]
   def index
     @items = Item.all.order("created_at DESC")
   end
   
   def new
     @item = Item.new
+    
   end
 
   def show
+  end
+
+  def posts
   end
 
   def create
@@ -49,4 +53,11 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def editorial_authority
+    @item = current_user.items.build
+   if user_signed_in? && @item.user == current_user.id
+    else
+      redirect_to root_path
+    end
+  end
 end
