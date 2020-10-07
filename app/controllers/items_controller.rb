@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :show]
 
   def index
-    # @Items = Item.all
+    @items = Item.all
   end
 
   def new
