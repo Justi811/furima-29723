@@ -31,8 +31,10 @@ class ItemsController < ApplicationController
   def redirect_to_index
     redirect_to new_user_session_path unless user_signed_in?
   end
-end
 
-def set_item
-  @item = Item.find(params[:id])
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
 end
