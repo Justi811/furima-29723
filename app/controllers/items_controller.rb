@@ -21,6 +21,18 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+  
+  def edit
+  end
+  
+  def update
+    
+    if @item.update(item_params)
+       render :show
+    else
+       render :edit
+    end
+  end
 
   private
 
