@@ -50,7 +50,7 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  encoding: unicode
+  # encoding: utf8
   pool: 5
   database: furima_29723_production
   username: furima_29723
