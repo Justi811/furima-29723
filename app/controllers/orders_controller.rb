@@ -9,12 +9,18 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    if @order.valid?
+       @order.save
+       return redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:user, :postcode, :prefecture_id, :city).merge(user_id: current_user.id)
+    params.permit(:item_id, :postcode, :prefecture_id, :city, :adress, :bulding, :phone).merge(user_id: current_user.id)
   end
 
   def set_item_id
@@ -22,6 +28,8 @@ class OrdersController < ApplicationController
   end
   
   def purchase_restrictions
-    redirect_to root_path if user_signed_in? && @item.user_id == current_user.id
+     redirect_to root_path if @item.user_id == current_user.id
   end
 end
+
+
