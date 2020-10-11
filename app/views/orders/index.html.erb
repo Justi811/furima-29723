@@ -10,10 +10,10 @@
       <%= image_tag "item-sample.png", class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
-          <%= "商品説明" %>
+          <%= @item.description %>
         </h2>
         <div class='buy-item-price'>
-          <p class='item-price-text'>¥<%= 999,999,999 %></p>
+          <p class='item-price-text'>¥<%= @item.price %></p>
           <p class='item-price-sub-text'>（税込）送料込み</p>
         </div>
       </div>
@@ -26,7 +26,7 @@
         支払金額
       </h1>
       <p class='item-payment-price'>
-        ¥<%= "販売価格" %>
+        ¥<%= @item.price %>
       </p>
     </div>
     <%# /支払額の表示 %>
@@ -42,7 +42,7 @@
           <label class="form-text">カード情報</label>
           <span class="indispensable">必須</span>
         </div>
-        <%= f.text_field 'hoge', class:"input-default", id:"card-number", placeholder:"カード番号(半角英数字)", maxlength:"16" %>
+        <%= f.text_field 'hoge' , class:"input-default", id:"card-number", placeholder:"カード番号(半角英数字)", maxlength:"16" %>
         <div class='available-card'>
           <%= image_tag 'card-visa.gif', class: 'card-logo'%>
           <%= image_tag 'card-mastercard.gif', class: 'card-logo'%>
