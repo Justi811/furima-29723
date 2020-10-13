@@ -30,6 +30,17 @@ class OrdersController < ApplicationController
   def purchase_restrictions
      redirect_to root_path if @item.user_id == current_user.id
   end
+
+  def pay_item
+    item_price = Item.find(params[:item_id])
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: item_price[:price],
+      card: order_params[:token],
+      currency: 'jpy'
+      )
+    end
 end
+
 
 
