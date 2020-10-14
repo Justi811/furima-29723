@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_item_id,only: [:index, :create]
+  before_action :set_item_id, only: [:index, :create]
   before_action :authenticate_user!
   before_action :purchase_restrictions
   before_action :owner_restrictions
@@ -9,12 +9,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-
     @order = OrderAddress.new(order_params)
     if @order.valid?
       pay_item
       @order.save
-       return redirect_to root_path
+      redirect_to root_path
     else
       render :index
     end
@@ -23,15 +22,15 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order_address).permit( :postcode, :prefecture_id, :city, :address, :building, :phone, :token).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:order_address).permit(:postcode, :prefecture_id, :city, :address, :building, :phone, :token).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
   def set_item_id
     @item = Item.find(params[:item_id])
   end
-  
+
   def purchase_restrictions
-     redirect_to root_path if @item.user_id == current_user.id
+    redirect_to root_path if @item.user_id == current_user.id
   end
 
   def pay_item
@@ -41,21 +40,16 @@ class OrdersController < ApplicationController
       amount: item_price[:price],
       card: order_params[:token],
       currency: 'jpy'
-      )
+    )
   end
 
-  #所有しているアイテムは注文できない
+  # 所有しているアイテムは注文できない
   def owner_restrictions
-    redirect_to root_path if current_user.id == @item.user_id 
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
-  #購入済みのアイテムに対しての処理に対するトップページ遷移
+  # 購入済みのアイテムに対しての処理に対するトップページ遷移
   def ordered_item
-      redirect_to root_path if @item.order.present? 
+    redirect_to root_path if @item.order.present?
   end
-
 end
-
-
-
-

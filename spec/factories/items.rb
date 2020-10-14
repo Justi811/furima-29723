@@ -4,7 +4,7 @@ FactoryBot.define do
     user_id          { 1 }
     name             { Faker::Coffee.blend_name }
     description      { Faker::Coffee.notes }
-    category_id      {2}
+    category_id      { 2}
     condition_id     {2}
     shipping_fee_id  {2}
     shipping_area_id {2}
