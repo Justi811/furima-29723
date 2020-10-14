@@ -2,15 +2,18 @@ class OrdersController < ApplicationController
   before_action :set_item_id,only: [:index, :create]
   before_action :authenticate_user!
   before_action :purchase_restrictions
-
+  before_action :owner_restrictions
+  before_action :ordered_item
   def index
-    @order = Order.new
+    @order = OrderAddress.new
   end
 
   def create
-    @order = Order.new(order_params)
+
+    @order = OrderAddress.new(order_params)
     if @order.valid?
-       @order.save
+      pay_item
+      @order.save
        return redirect_to root_path
     else
       render :index
@@ -20,7 +23,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:item_id, :postcode, :prefecture_id, :city, :adress, :bulding, :phone, :token).merge(user_id: current_user.id)
+    params.require(:order_address).permit( :postcode, :prefecture_id, :city, :address, :building, :phone, :token).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
   def set_item_id
@@ -39,8 +42,20 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
       )
-    end
+  end
+
+  #所有しているアイテムは注文できない
+  def owner_restrictions
+    redirect_to root_path if current_user.id == @item.user_id 
+  end
+
+  #購入済みのアイテムに対しての処理に対するトップページ遷移
+  def ordered_item
+      redirect_to root_path if @item.order.present? 
+  end
+
 end
+
 
 
 
