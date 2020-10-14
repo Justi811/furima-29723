@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :token, :user_id, :item_id,:postcode, :prefecture_id, :city, :address, :building, :phone
+  attr_accessor :token, :user_id, :item_id,:postcode, :prefecture_id, :city, :address, :bulding, :phone
 
   POSTCODE_REGEX = /\A[0-9]{3}-[0-9]{4}\z/.freeze
   PHONE_REGEX = /\A[0-9０−９]+\z/.freeze
@@ -14,8 +14,8 @@ class OrderAddress
   end
 
   def save
-    order = Order.create!(user_id: user_id, item_id: item_id)
-    Address.create!(postcode: postcode, prefecture_id: prefecture_id, city: city, address: address, building: building, phone: phone, order_id: order.id)
+    order = Order.create(user_id: user_id, product_id: product_id)
+    Address.create(postal_code: postal_code, prefecture_id: prefecture_id, municipalitie: municipalitie, address: address, building: building, phone_number: phone_number, order_id: order.id)
   end
   validates :prefecture_id,  presence: true,numericality:  { greater_than: 1 }
 end
