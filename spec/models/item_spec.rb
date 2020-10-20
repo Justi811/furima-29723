@@ -16,80 +16,81 @@ RSpec.describe Item, type: :model do
       it 'name未入力のため出品不可' do
         @item.name = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Name can't be blank")
+        expect(@item.errors.full_messages).to include("商品名を入力してください")
       end
 
       it 'description未入力のため出品不可' do
         @item.description = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Description can't be blank")
+        expect(@item.errors.full_messages).to include("説明を入力してください")
       end
 
       it 'image未添付のため出品不可' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include("画像を入力してください")
       end
 
       it 'category未選択のため出品不可' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category must be greater than 1')
+        expect(@item.errors.full_messages).to include("カテゴリーは1より大きい値にしてください")
       end
 
       it 'condition未選択のため出品不可' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Condition must be greater than 1')
+        expect(@item.errors.full_messages).to include("商品の状態は1より大きい値にしてください")
       end
 
       it 'shipping_fee未選択のため出品不可' do
         @item.shipping_fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping fee must be greater than 1')
+        expect(@item.errors.full_messages).to include("配送料の負担は1より大きい値にしてください")
       end
 
       it 'shipping_area未選択のため出品不可' do
         @item.shipping_area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping area must be greater than 1')
+        expect(@item.errors.full_messages).to include("発送元の地域は1より大きい値にしてください")
       end
 
       it 'shipping_date未選択のため出品不可' do
         @item.shipping_date_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping date must be greater than 1')
+        expect(@item.errors.full_messages).to include("発送までの日数は1より大きい値にしてください")
       end
 
       it 'shipping_date未選択のため出品不可' do
         @item.shipping_date_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping date must be greater than 1')
+        expect(@item.errors.full_messages).to include("発送までの日数は1より大きい値にしてください")
       end
 
       it 'price未入力のため出品不可' do
         @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("価格を入力してください")
       end
 
       it 'priceが半角数字以外のため出品不可' do
         @item.price = "\b\b２０００yen"
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not a number')
+        expect(@item.errors.full_messages).to include( "価格は数値で入力してください")
       end
 
       it 'priceが300円未満の場合出品できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
+        expect(@item.errors.full_messages).to include("価格は300以上の値にしてください")
       end
 
       it 'priceが10000000以上の場合出品できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+        expect(@item.errors.full_messages).to include("価格は9999999以下の値にしてください")
       end
     end
   end
 end
+
