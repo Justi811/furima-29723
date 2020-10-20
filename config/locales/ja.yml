@@ -19,8 +19,7 @@ ja:
         shipping_date_id: 発送までの日数
         price: 価格
         image: 画像
-ja:
- activemodel:
+  activemodel:
     attributes:
       order_address:
         postcode: 郵便番号
