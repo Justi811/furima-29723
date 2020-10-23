@@ -1,11 +1,12 @@
 class ItemsController < ApplicationController
-  before_action :redirect_to_index, except: [:index, :show, :edit]
+  before_action :redirect_to_index, except: [:index, :show, :edit,:search]
   before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :editorial_authority, only: [:edit, :destroy]
   before_action :ordered_item, only: [:edit, :destroy]
-
+  before_action :search_item, only: [:search,:search_index,:index]
   def index
     @items = Item.all.order('created_at DESC')
+    
   end
 
   def new
@@ -46,7 +47,29 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    @items = Item.search(params[:keyword]).order('created_at DESC')
+
+  end
+
+
+
+  def search_index
+    @items = Item.all.order('created_at DESC')
+    @category = Category.where.not(id: 1)
+    @condition = Condition.where.not(id: 1)
+    @shipping_date =ShippingDate.where.not(id: 1)
+    @order = Order.all
+    @results = @si.result
+  end
+
+
+
   private
+
+  def search_item
+    @si = Item.ransack(params[:q])
+  end
 
   def item_params
     params.require(:item).permit(:user, :name, :description, :category_id, :condition_id, :shipping_fee_id, :shipping_area_id, :shipping_date_id, :price, :image).merge(user_id: current_user.id)
