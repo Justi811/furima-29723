@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :items do
   resources :orders,only:[:index, :create]
   collection do
+    get 'search_index'
     get 'search'
   end
 end
